@@ -1,0 +1,364 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;1,500&family=IBM+Plex+Mono:wght@500&family=Inter:wght@400;500;600&display=swap");
+
+.login-page {
+  --ink: #12181f;
+  --ink-soft: #1b232c;
+  --paper: #f6f3ec;
+  --paper-dim: #ece6d8;
+  --brass: #c9a24b;
+  --brass-soft: #e4c878;
+  --text-dark: #1b1f23;
+  --text-muted: #6b6f76;
+  --text-inverse: #f2ede1;
+  --danger: #b4453a;
+
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 42% 58%;
+  font-family: "Inter", system-ui, sans-serif;
+  background: var(--paper);
+  color: var(--text-dark);
+}
+
+/* ---------- Showcase panel ---------- */
+
+.login-showcase {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--ink);
+  color: var(--text-inverse);
+  padding: clamp(2rem, 5vw, 4.5rem);
+  overflow: hidden;
+}
+
+.login-showcase::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    rgba(201, 162, 75, 0.16) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.showcase-content {
+  position: relative;
+  max-width: 30ch;
+}
+
+.showcase-eyebrow {
+  display: inline-block;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--brass-soft);
+  margin-bottom: 1.4rem;
+}
+
+.showcase-title {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+  line-height: 1.05;
+  margin: 0 0 1.2rem;
+}
+
+.showcase-title em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--brass-soft);
+}
+
+.showcase-quote {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: rgba(242, 237, 225, 0.72);
+  max-width: 28ch;
+}
+
+.showcase-line {
+  position: absolute;
+  left: clamp(2rem, 5vw, 4.5rem);
+  bottom: clamp(2rem, 5vw, 4.5rem);
+  width: 46px;
+  height: 2px;
+  background: var(--brass);
+}
+
+/* ---------- Form panel ---------- */
+
+.login-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.75rem, 4vw, 3rem);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-title {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: 1.9rem;
+  margin: 0 0 0.4rem;
+  color: var(--text-dark);
+}
+
+.login-subtitle {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  margin: 0 0 2rem;
+}
+
+.field {
+  display: block;
+  margin-bottom: 1.35rem;
+}
+
+.field-label {
+  display: block;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.field input[type="email"],
+.field input[type="password"],
+.field input[type="text"] {
+  width: 100%;
+  border: none;
+  border-bottom: 1.5px solid var(--paper-dim);
+  background: transparent;
+  padding: 0.55rem 0.1rem;
+  font-size: 1rem;
+  font-family: "Inter", sans-serif;
+  color: var(--text-dark);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.field input::placeholder {
+  color: #b7b0a0;
+}
+
+.field input:focus {
+  border-bottom-color: var(--brass);
+}
+
+.field input:disabled {
+  opacity: 0.6;
+}
+
+.password-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrap input {
+  padding-right: 2.2rem;
+}
+
+.toggle-visibility {
+  position: absolute;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.3rem;
+}
+
+.toggle-visibility:hover {
+  color: var(--text-dark);
+}
+
+.field-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.6rem;
+  font-size: 0.85rem;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  user-select: none;
+}
+
+.checkbox input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.checkbox-box {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--paper-dim);
+  border-radius: 3px;
+  background: transparent;
+  display: inline-block;
+  position: relative;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.checkbox input:checked + .checkbox-box {
+  background: var(--brass);
+  border-color: var(--brass);
+}
+
+.checkbox input:checked + .checkbox-box::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid var(--ink);
+  border-width: 0 2px 2px 0;
+  transform: rotate(40deg);
+}
+
+.checkbox input:focus-visible + .checkbox-box {
+  outline: 2px solid var(--brass);
+  outline-offset: 2px;
+}
+
+.link {
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-decoration-color: var(--paper-dim);
+  text-underline-offset: 3px;
+}
+
+.link:hover {
+  color: var(--text-dark);
+  text-decoration-color: var(--brass);
+}
+
+.form-error {
+  background: rgba(180, 69, 58, 0.08);
+  border: 1px solid rgba(180, 69, 58, 0.25);
+  color: var(--danger);
+  font-size: 0.85rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 6px;
+  margin: -0.4rem 0 1.2rem;
+}
+
+.submit-btn {
+  width: 100%;
+  border: none;
+  background: var(--brass);
+  color: var(--ink);
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.85rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.06s ease;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: var(--brass-soft);
+}
+
+.submit-btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.submit-btn:focus-visible,
+.field input:focus-visible,
+.toggle-visibility:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 2px;
+}
+
+.login-foot {
+  margin: 1.5rem 0 0;
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.login-foot a {
+  color: var(--text-dark);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--brass);
+}
+
+/* ---------- Responsive: tablet / mobile ---------- */
+
+@media (max-width: 860px) {
+  .login-page {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .login-showcase {
+    padding: 2rem 1.5rem 2.75rem;
+    min-height: 0;
+  }
+
+  .showcase-title {
+    font-size: clamp(1.9rem, 7vw, 2.4rem);
+  }
+
+  .showcase-line {
+    display: none;
+  }
+
+  .login-panel {
+    padding: 1.75rem 1.25rem 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .showcase-quote {
+    display: none;
+  }
+
+  .login-showcase {
+    padding: 1.75rem 1.25rem 2rem;
+  }
+
+  .login-card {
+    max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .field input,
+  .submit-btn,
+  .checkbox-box {
+    transition: none;
+  }
+}
