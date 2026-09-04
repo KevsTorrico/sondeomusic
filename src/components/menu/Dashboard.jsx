@@ -1,8 +1,8 @@
 import "./Dashboard.css";
 import logoIcon from "../../assets/logo-mixer.jpeg";
 
-export default function Dashboard() {
-  const stats = [
+export default function Dashboard({ onLogout }) {
+    const stats = [
     {
       label: "Equipos",
       value: "128",
@@ -157,7 +157,7 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <button className="logout-button">
+          <button className="logout-button" onClick={onLogout}>
             <span>↪</span>
             Cerrar sesión
           </button>

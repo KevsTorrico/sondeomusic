@@ -1,27 +1,54 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { supabase } from "./supabaseClient";
 import LoginPage from "./components/Login/LoginPage";
 import Dashboard from "./components/menu/Dashboard";
 
 export default function App() {
-  // Reemplaza esto con tu llamada real a la API / auth provider
-  // const handleLogin = async ({ email, password, remember }) => {
-  //   console.log("Intentando iniciar sesión con:", { email, password, remember });
+  const [session, setSession] = useState(null);
+  const [loadingSession, setLoadingSession] = useState(true);
 
-  //   // Ejemplo de integración real:
-  //   // const res = await fetch("/api/login", {
-  //   //   method: "POST",
-  //   //   headers: { "Content-Type": "application/json" },
-  //   //   body: JSON.stringify({ email, password }),
-  //   // });
-  //   // if (!res.ok) return { error: "Correo o contraseña incorrectos." };
-  // };
+  useEffect(() => {
+    // Sesión actual al cargar la app
+    supabase.auth.getSession().then(({ data }) => {
+      setSession(data.session);
+      setLoadingSession(false);
+    });
 
-  // const [isAuthenticated, setIsAuthenticated] = useState(false);
+    // Escucha cambios de sesión (login, logout, token refresh)
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, newSession) => {
+        setSession(newSession);
+      }
+    );
 
-  // if (isAuthenticated) {
-  //   return <Dashboard />;
-  // }
+    return () => listener.subscription.unsubscribe();
+  }, []);
 
-  // return <LoginPage onSubmit={handleLogin} />;
-  return <Dashboard />;
+  const handleLogin = async ({ email, password }) => {
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      return { error: mapAuthError(error.message) };
+    }
+    // Éxito: onAuthStateChange actualiza "session" solo
+    return {};
+  };
+
+  function mapAuthError(message) {
+    if (message.includes("Invalid login credentials")) {
+      return "Correo o contraseña incorrectos.";
+    }
+    return "No pudimos iniciar tu sesión. Intenta de nuevo.";
+  }
+
+  if (loadingSession) return null; // o un spinner
+
+  return session ? (
+    <Dashboard onLogout={() => supabase.auth.signOut()} />
+  ) : (
+    <LoginPage onSubmit={handleLogin} />
+  );
 }
