@@ -1,19 +1,72 @@
+import { useEffect, useState } from "react";
+import { supabase } from "../../supabaseClient";
 import "./Dashboard.css";
 
 export default function DashboardHome() {
-  const stats = [
-    { label: "Equipos", value: "128", detail: "+8 este mes", icon: "▣" },
-    { label: "Categorías", value: "14", detail: "+2 este mes", icon: "◫" },
-    { label: "Disponibles", value: "96", detail: "75% del inventario", icon: "✓" },
-    { label: "En mantenimiento", value: "12", detail: "9% del inventario", icon: "⚙" },
-  ];
+  const [stats, setStats] = useState(null);
+  const [recentEquipment, setRecentEquipment] = useState([]);
+  const [recentAlquileres, setRecentAlquileres] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const recentEquipment = [
-    { name: "JBL VRX928LA", category: "Parlante", status: "Disponible", code: "SON-00128" },
-    { name: "Shure SM58", category: "Micrófono", status: "Disponible", code: "SON-00127" },
-    { name: "Behringer P1", category: "In-Ear", status: "Mantenimiento", code: "SON-00126" },
-    { name: "Mackie DL32R", category: "Consola", status: "Disponible", code: "SON-00125" },
-  ];
+  async function cargarDatos() {
+    setLoading(true);
+
+    const [
+      { count: totalEquipos },
+      { count: totalCategorias },
+      { count: disponibles },
+      { count: mantenimiento },
+      { data: equiposRecientes },
+      { data: alquileresRecientes },
+    ] = await Promise.all([
+      supabase.from("equipos").select("*", { count: "exact", head: true }),
+      supabase.from("categorias").select("*", { count: "exact", head: true }),
+      supabase
+        .from("equipos")
+        .select("*", { count: "exact", head: true })
+        .eq("disponibilidad", "disponible"),
+      supabase
+        .from("equipos")
+        .select("*", { count: "exact", head: true })
+        .eq("disponibilidad", "mantenimiento"),
+      supabase
+        .from("equipos")
+        .select("id, codigo, informacion, disponibilidad, categorias ( nombre )")
+        .order("created_at", { ascending: false })
+        .limit(4),
+      supabase
+        .from("alquileres")
+        .select("id, fecha_inicio, fecha_fin, estado, clientes ( nombre, apellidos )")
+        .order("created_at", { ascending: false })
+        .limit(4),
+    ]);
+
+    setStats({
+      totalEquipos: totalEquipos ?? 0,
+      totalCategorias: totalCategorias ?? 0,
+      disponibles: disponibles ?? 0,
+      mantenimiento: mantenimiento ?? 0,
+    });
+    setRecentEquipment(equiposRecientes ?? []);
+    setRecentAlquileres(alquileresRecientes ?? []);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    cargarDatos();
+  }, []);
+
+  const porcentaje = (n) =>
+    stats?.totalEquipos ? Math.round((n / stats.totalEquipos) * 100) : 0;
+
+  const statsCards = stats
+    ? [
+        { label: "Equipos", value: stats.totalEquipos, icon: "▣" },
+        { label: "Categorías", value: stats.totalCategorias, icon: "◫" },
+        { label: "Disponibles", value: stats.disponibles, detail: `${porcentaje(stats.disponibles)}% del inventario`, icon: "✓" },
+        { label: "En mantenimiento", value: stats.mantenimiento, detail: `${porcentaje(stats.mantenimiento)}% del inventario`, icon: "⚙" },
+      ]
+    : [];
 
   return (
     <>
@@ -37,72 +90,81 @@ export default function DashboardHome() {
         </div>
       </header>
 
-      <section className="stats-grid">
-        {stats.map((stat) => (
-          <article className="stat-card" key={stat.label}>
-            <div className="stat-top">
-              <span className="stat-label">{stat.label}</span>
-              <span className="stat-icon">{stat.icon}</span>
-            </div>
-            <div className="stat-value">{stat.value}</div>
-            <div className="stat-detail">{stat.detail}</div>
-          </article>
-        ))}
-      </section>
-
-      <section className="dashboard-grid">
-        <article className="dashboard-card activity-card">
-          <div className="card-header">
-            <div>
-              <span className="card-eyebrow">ACTIVIDAD</span>
-              <h2>Actividad reciente</h2>
-            </div>
-            <button className="card-link">Ver todo</button>
-          </div>
-
-          <div className="activity-list">
-            <div className="activity-item">
-              <div className="activity-icon">+</div>
-              <div className="activity-content">
-                <strong>Nuevo equipo agregado</strong>
-                <span>JBL VRX928LA fue añadido al inventario</span>
-                <small>Hace 12 minutos</small>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article className="dashboard-card inventory-card">
-          <div className="card-header">
-            <div>
-              <span className="card-eyebrow">INVENTARIO</span>
-              <h2>Equipos recientes</h2>
-            </div>
-            <button className="add-button">+ Agregar</button>
-          </div>
-
-          <div className="equipment-list">
-            {recentEquipment.map((equipment) => (
-              <div className="equipment-item" key={equipment.code}>
-                <div className="equipment-image">▣</div>
-                <div className="equipment-info">
-                  <strong>{equipment.name}</strong>
-                  <span>{equipment.category} · {equipment.code}</span>
+      {loading ? (
+        <p>Cargando...</p>
+      ) : (
+        <>
+          <section className="stats-grid">
+            {statsCards.map((stat) => (
+              <article className="stat-card" key={stat.label}>
+                <div className="stat-top">
+                  <span className="stat-label">{stat.label}</span>
+                  <span className="stat-icon">{stat.icon}</span>
                 </div>
-                <span
-                  className={`status ${
-                    equipment.status === "Disponible" ? "available" : "maintenance"
-                  }`}
-                >
-                  {equipment.status}
-                </span>
-              </div>
+                <div className="stat-value">{stat.value}</div>
+                {stat.detail && <div className="stat-detail">{stat.detail}</div>}
+              </article>
             ))}
-          </div>
+          </section>
 
-          <button className="view-inventory">Ver inventario completo →</button>
-        </article>
-      </section>
+          <section className="dashboard-grid">
+            <article className="dashboard-card activity-card">
+              <div className="card-header">
+                <div>
+                  <span className="card-eyebrow">MOVIMIENTOS</span>
+                  <h2>Alquileres recientes</h2>
+                </div>
+              </div>
+
+              <div className="activity-list">
+                {recentAlquileres.length === 0 && <p>Todavía no hay alquileres registrados.</p>}
+
+                {recentAlquileres.map((a) => (
+                  <div className="activity-item" key={a.id}>
+                    <div className="activity-icon">
+                      {a.estado === "finalizado" ? "✓" : a.estado === "cancelado" ? "×" : "↔"}
+                    </div>
+                    <div className="activity-content">
+                      <strong>{a.clientes?.nombre} {a.clientes?.apellidos}</strong>
+                      <span>{a.fecha_inicio} → {a.fecha_fin} · {a.estado}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </article>
+
+            <article className="dashboard-card inventory-card">
+              <div className="card-header">
+                <div>
+                  <span className="card-eyebrow">INVENTARIO</span>
+                  <h2>Equipos recientes</h2>
+                </div>
+              </div>
+
+              <div className="equipment-list">
+                {recentEquipment.length === 0 && <p>Todavía no hay equipos registrados.</p>}
+
+                {recentEquipment.map((equipment) => (
+                  <div className="equipment-item" key={equipment.id}>
+                    <div className="equipment-image">▣</div>
+                    <div className="equipment-info">
+                      <strong>{equipment.codigo}</strong>
+                      <span>{equipment.categorias?.nombre} · {equipment.informacion || "—"}</span>
+                    </div>
+                    <span
+                      className={`status ${
+                        equipment.disponibilidad === "disponible" ? "available" : "maintenance"
+                      }`}
+                    >
+                      {equipment.disponibilidad}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </article>
+          </section>
+        </>
+      )}
     </>
   );
 }
