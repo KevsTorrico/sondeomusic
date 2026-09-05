@@ -4,11 +4,14 @@ import logoIcon from "../../assets/logo-mixer.jpeg";
 import DashboardHome from "./DashboardHome";
 import CategoriasPage from "../Categorias/CategoriasPage";
 import InventarioPage from "../Inventario/InventarioPage";
+import ClientesPage from "../Clientes/ClientesPage";
+import MovimientosPage from "../Movimientos/MovimientosPage";
 
 const NAV_ITEMS = [
   { key: "dashboard", label: "Dashboard", icon: "⌂" },
   { key: "inventario", label: "Inventario", icon: "▣" },
   { key: "categorias", label: "Categorías", icon: "◫" },
+  { key: "clientes", label: "Clientes", icon: "☺" },
   { key: "movimientos", label: "Movimientos", icon: "↔" },
 ];
 
@@ -29,6 +32,10 @@ export default function Dashboard({ onLogout }) {
         return <DashboardHome />;
       case "inventario":
         return <InventarioPage />;
+      case "clientes":
+        return <ClientesPage />;
+      case "movimientos":
+        return <MovimientosPage />;
       default:
         return (
           <div className="dashboard-card">

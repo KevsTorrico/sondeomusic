@@ -1,0 +1,130 @@
+.alquileres-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.alquiler-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.alquiler-header span {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.estado-alquiler {
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.65rem;
+  text-transform: capitalize;
+}
+
+.estado-reservado { background: var(--paper); color: var(--text-muted); }
+.estado-en_curso { background: rgba(78, 143, 196, 0.1); color: var(--accent); }
+.estado-finalizado { background: var(--success-bg); color: var(--success); }
+.estado-cancelado { background: rgba(180, 69, 58, 0.1); color: var(--danger); }
+
+.alquiler-fechas {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+}
+
+.alquiler-equipos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.8rem;
+}
+
+.equipo-chip {
+  padding: 0.2rem 0.55rem;
+  border-radius: 20px;
+  background: var(--paper);
+  font-size: 0.68rem;
+}
+
+.alquiler-acciones {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.alquiler-acciones button {
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--paper-dim);
+  border-radius: 6px;
+  background: white;
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.alquiler-cancelar {
+  color: var(--danger);
+}
+
+.alquiler-form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.alquiler-form-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.alquiler-form-grid input,
+.alquiler-form-grid select {
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--paper-dim);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: var(--text-dark);
+}
+
+.cliente-select-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.cliente-select-row select {
+  flex: 1;
+}
+
+.cliente-select-row button {
+  padding: 0 0.7rem;
+  border: 1px solid var(--paper-dim);
+  border-radius: 6px;
+  background: white;
+  font-size: 0.75rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.equipos-checklist {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  max-height: 220px;
+  overflow-y: auto;
+  margin: 0.8rem 0;
+  padding: 0.8rem;
+  border: 1px solid var(--paper-dim);
+  border-radius: 7px;
+}
+
+.equipo-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+}
