@@ -1,0 +1,70 @@
+.usuario-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.usuario-form-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.usuario-form-grid input {
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--paper-dim);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.85rem;
+}
+
+.form-error-usuarios {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid rgba(180, 69, 58, 0.25);
+  border-radius: 6px;
+  background: rgba(180, 69, 58, 0.08);
+  color: var(--danger);
+  font-size: 0.82rem;
+  margin-bottom: 0.5rem;
+}
+
+.usuarios-tabla {
+  display: flex;
+  flex-direction: column;
+}
+
+.usuario-fila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid #edf1f4;
+}
+
+.usuario-fila:last-child {
+  border-bottom: none;
+}
+
+.usuario-fila div {
+  display: flex;
+  flex-direction: column;
+}
+
+.usuario-fila span {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+}
+
+.usuario-eliminar {
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--paper-dim);
+  border-radius: 6px;
+  background: white;
+  color: var(--danger);
+  font-size: 0.72rem;
+  cursor: pointer;
+}

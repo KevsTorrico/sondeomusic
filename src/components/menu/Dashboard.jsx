@@ -6,6 +6,7 @@ import CategoriasPage from "../Categorias/CategoriasPage";
 import InventarioPage from "../Inventario/InventarioPage";
 import ClientesPage from "../Clientes/ClientesPage";
 import MovimientosPage from "../Movimientos/MovimientosPage";
+import UsuariosPage from "../Usuarios/UsuariosPage";
 
 const NAV_ITEMS = [
   { key: "dashboard", label: "Dashboard", icon: "⌂" },
@@ -36,6 +37,8 @@ export default function Dashboard({ onLogout }) {
         return <ClientesPage />;
       case "movimientos":
         return <MovimientosPage />;
+      case "usuarios":
+        return <UsuariosPage />;
       default:
         return (
           <div className="dashboard-card">
