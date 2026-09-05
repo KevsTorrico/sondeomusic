@@ -1,0 +1,141 @@
+.filtros-bar {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+}
+
+.filtros-bar input,
+.filtros-bar select {
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--paper-dim);
+  border-radius: 7px;
+  font-family: inherit;
+  font-size: 0.8rem;
+}
+
+.filtros-bar input {
+  flex: 1;
+}
+
+.equipos-tabla {
+  display: flex;
+  flex-direction: column;
+}
+
+.equipo-fila {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid #edf1f4;
+}
+
+.equipo-fila:last-child {
+  border-bottom: none;
+}
+
+.equipo-fila-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.equipo-fila-info span {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.equipo-fila-info small {
+  font-size: 0.68rem;
+  color: var(--text-light);
+}
+
+.estado-badge {
+  padding: 0.25rem 0.55rem;
+  border-radius: 20px;
+  font-size: 0.65rem;
+  text-transform: capitalize;
+}
+
+.estado-bueno {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.estado-regular {
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+.estado-malo {
+  background: rgba(180, 69, 58, 0.1);
+  color: var(--danger);
+}
+
+.equipo-fila-acciones {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.equipo-fila-acciones button {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--paper-dim);
+  border-radius: 6px;
+  background: white;
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+
+.equipo-eliminar {
+  color: var(--danger);
+}
+
+.equipo-form {
+  margin-bottom: 1.5rem;
+}
+
+.equipo-form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.equipo-form-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.equipo-form-grid input,
+.equipo-form-grid select {
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--paper-dim);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: var(--text-dark);
+}
+
+.equipo-form-acciones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+.equipo-form-acciones button {
+  padding: 0.6rem 1.1rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.equipo-form-acciones button[type="button"] {
+  border: 1px solid var(--paper-dim);
+  background: white;
+  color: var(--text-muted);
+}

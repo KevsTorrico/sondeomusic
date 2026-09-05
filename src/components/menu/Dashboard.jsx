@@ -3,6 +3,7 @@ import "./Dashboard.css";
 import logoIcon from "../../assets/logo-mixer.jpeg";
 import DashboardHome from "./DashboardHome";
 import CategoriasPage from "../Categorias/CategoriasPage";
+import InventarioPage from "../Inventario/InventarioPage";
 
 const NAV_ITEMS = [
   { key: "dashboard", label: "Dashboard", icon: "⌂" },
@@ -26,6 +27,8 @@ export default function Dashboard({ onLogout }) {
         return <CategoriasPage />;
       case "dashboard":
         return <DashboardHome />;
+      case "inventario":
+        return <InventarioPage />;
       default:
         return (
           <div className="dashboard-card">
