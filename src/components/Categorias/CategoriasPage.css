@@ -1,0 +1,177 @@
+.categoria-form {
+  display: flex;
+  gap: 0.7rem;
+}
+
+.categoria-form input {
+  flex: 1;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--paper-dim);
+  border-radius: 7px;
+  font-family: inherit;
+  font-size: 0.85rem;
+}
+
+.categoria-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+
+.categoria-item {
+  padding: 0;
+  overflow: hidden;
+}
+
+.categoria-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.4rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.categoria-count {
+  margin-left: auto;
+  margin-right: 0.8rem;
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.categoria-caret {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.categoria-body {
+  padding: 0 1.4rem 1.3rem;
+  border-top: 1px solid var(--paper-dim);
+}
+
+.atributo-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid #edf1f4;
+}
+
+.atributo-info {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 160px;
+}
+
+.tipo-badge {
+  padding: 0.15rem 0.5rem;
+  border-radius: 20px;
+  font-size: 0.62rem;
+}
+
+.tipo-texto {
+  background: var(--paper);
+  color: var(--text-muted);
+}
+
+.tipo-lista {
+  background: rgba(78, 143, 196, 0.1);
+  color: var(--accent);
+}
+
+.opciones-box {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.opciones-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.opcion-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 20px;
+  background: var(--paper);
+  font-size: 0.7rem;
+}
+
+.opcion-chip button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.opcion-form {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.opcion-form input {
+  padding: 0.3rem 0.5rem;
+  border: 1px solid var(--paper-dim);
+  border-radius: 6px;
+  font-size: 0.72rem;
+}
+
+.opcion-form button {
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--paper-dim);
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+}
+
+.atributo-delete,
+.categoria-delete {
+  border: none;
+  background: transparent;
+  color: var(--danger);
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.categoria-delete {
+  margin-top: 1rem;
+}
+
+.atributo-form {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.atributo-form input {
+  flex: 1;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--paper-dim);
+  border-radius: 6px;
+  font-size: 0.8rem;
+}
+
+.atributo-form select {
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--paper-dim);
+  border-radius: 6px;
+  font-size: 0.8rem;
+}
