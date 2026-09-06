@@ -117,7 +117,22 @@
 
 
 /* NAV */
+.sidebar-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
+.mobile-menu-toggle {
+  display: none;
+}
+
+.sidebar-collapsible {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
 .sidebar-nav {
   flex: 1;
 }
@@ -135,7 +150,15 @@
 
   color: rgba(234, 241, 248, 0.42);
 }
-
+.nav-item {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+}
 .nav-item {
   display: flex;
   align-items: center;
@@ -981,27 +1004,21 @@
 
   /* SIDEBAR -> TOP BAR */
 
-  .dashboard-sidebar {
+    .dashboard-sidebar {
     position: relative;
 
     width: 100%;
-
     min-height: auto;
 
-    height: 64px;
-
     padding: 0 1rem;
+  }
 
-    flex-direction: row;
-
-    align-items: center;
-
-    justify-content: space-between;
+  .sidebar-top-row {
+    height: 64px;
   }
 
   .sidebar-brand {
     padding: 0;
-
     gap: 0.6rem;
   }
 
@@ -1018,29 +1035,59 @@
     font-size: 0.85rem;
   }
 
-  .sidebar-nav {
+  .mobile-menu-toggle {
     display: flex;
-
     align-items: center;
+    justify-content: center;
 
-    gap: 0.25rem;
-  }
-
-  .nav-section-title {
-    display: none;
-  }
-
-  .nav-item {
     width: 38px;
     height: 38px;
 
-    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 7px;
 
-    padding: 0;
+    background: transparent;
+    color: white;
+
+    font-size: 1.1rem;
+
+    cursor: pointer;
+  }
+
+  .sidebar-collapsible {
+    display: none;
+  }
+
+  .dashboard-sidebar.mobile-open .sidebar-collapsible {
+    display: flex;
+
+    position: absolute;
+    top: 64px;
+    left: 0;
+
+    width: 100%;
+    max-height: calc(100vh - 64px);
+
+    overflow-y: auto;
+
+    background: var(--ink);
+
+    padding: 1rem;
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+
+    z-index: 30;
+  }
+
+  .nav-item {
+    width: 100%;
+    height: auto;
+    justify-content: flex-start;
+    padding: 0.75rem 0.8rem;
   }
 
   .nav-item span:last-child {
-    display: none;
+    display: inline;
   }
 
   .sidebar-bottom {

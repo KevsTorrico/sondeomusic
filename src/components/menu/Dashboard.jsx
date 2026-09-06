@@ -24,7 +24,11 @@ const ADMIN_ITEMS = [
 
 export default function Dashboard({ onLogout }) {
   const [view, setView] = useState("dashboard");
-
+const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+function ir(viewKey) {
+  setView(viewKey);
+  setMobileMenuOpen(false);
+}
   function renderView() {
     switch (view) {
       case "categorias":
@@ -53,57 +57,69 @@ export default function Dashboard({ onLogout }) {
 
       {/* ================= SIDEBAR ================= */}
 
-      <aside className="dashboard-sidebar">
+      <aside className={`dashboard-sidebar ${mobileMenuOpen ? "mobile-open" : ""}`}>
 
-        <div className="sidebar-brand">
-          <img src={logoIcon} alt="Sondeo Music" className="sidebar-logo" />
-          <div className="sidebar-brand-text">
-            <strong style={{ color: "white" }}>SONDEO</strong>
-            <span>music</span>
-          </div>
-        </div>
-
-        <nav className="sidebar-nav">
-          <p className="nav-section-title">PRINCIPAL</p>
-
-          {NAV_ITEMS.map((item) => (
-            <button
-              key={item.key}
-              className={`nav-item ${view === item.key ? "active" : ""}`}
-              onClick={() => setView(item.key)}
-            >
-              <span className="nav-icon">{item.icon}</span>
-              <span>{item.label}</span>
-            </button>
-          ))}
-
-          <p className="nav-section-title">ADMINISTRACIÓN</p>
-
-          {ADMIN_ITEMS.map((item) => (
-            <button
-              key={item.key}
-              className={`nav-item ${view === item.key ? "active" : ""}`}
-              onClick={() => setView(item.key)}
-            >
-              <span className="nav-icon">{item.icon}</span>
-              <span>{item.label}</span>
-            </button>
-          ))}
-        </nav>
-
-        <div className="sidebar-bottom">
-          <div className="sidebar-user">
-            <div className="user-avatar">KT</div>
-            <div className="sidebar-user-info">
-              <strong>Administrador</strong>
-              <span>admin@sondeo.com</span>
+        <div className="sidebar-top-row">
+          <div className="sidebar-brand">
+            <img src={logoIcon} alt="Sondeo Music" className="sidebar-logo" />
+            <div className="sidebar-brand-text">
+              <strong style={{ color: "white" }}>SONDEO</strong>
+              <span>music</span>
             </div>
           </div>
 
-          <button className="logout-button" onClick={onLogout}>
-            <span>↪</span>
-            Cerrar sesión
+          <button
+            className="mobile-menu-toggle"
+            onClick={() => setMobileMenuOpen((v) => !v)}
+            aria-label="Abrir menú"
+          >
+            {mobileMenuOpen ? "×" : "☰"}
           </button>
+        </div>
+
+        <div className="sidebar-collapsible">
+          <nav className="sidebar-nav">
+            <p className="nav-section-title">PRINCIPAL</p>
+
+            {NAV_ITEMS.map((item) => (
+              <button
+                key={item.key}
+                className={`nav-item ${view === item.key ? "active" : ""}`}
+                onClick={() => ir(item.key)}
+              >
+                <span className="nav-icon">{item.icon}</span>
+                <span>{item.label}</span>
+              </button>
+            ))}
+
+            <p className="nav-section-title">ADMINISTRACIÓN</p>
+
+            {ADMIN_ITEMS.map((item) => (
+              <button
+                key={item.key}
+                className={`nav-item ${view === item.key ? "active" : ""}`}
+                onClick={() => ir(item.key)}
+              >
+                <span className="nav-icon">{item.icon}</span>
+                <span>{item.label}</span>
+              </button>
+            ))}
+          </nav>
+
+          <div className="sidebar-bottom">
+            <div className="sidebar-user">
+              <div className="user-avatar">KT</div>
+              <div className="sidebar-user-info">
+                <strong>Administrador</strong>
+                <span>admin@sondeo.com</span>
+              </div>
+            </div>
+
+            <button className="logout-button" onClick={onLogout}>
+              <span>↪</span>
+              Cerrar sesión
+            </button>
+          </div>
         </div>
 
       </aside>
