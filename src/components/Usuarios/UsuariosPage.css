@@ -68,3 +68,13 @@
   font-size: 0.72rem;
   cursor: pointer;
 }
+@media (max-width: 760px) {
+  .usuario-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .usuario-fila {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}

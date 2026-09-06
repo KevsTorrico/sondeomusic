@@ -128,3 +128,29 @@
   gap: 0.5rem;
   font-size: 0.78rem;
 }
+@media (max-width: 760px) {
+  .alquiler-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .equipos-checklist {
+    grid-template-columns: 1fr;
+  }
+
+  .alquiler-header {
+    flex-wrap: wrap;
+  }
+
+  .alquiler-acciones {
+    flex-wrap: wrap;
+  }
+
+  .cliente-select-row {
+    flex-wrap: wrap;
+  }
+
+  .cliente-select-row select,
+  .cliente-select-row button {
+    width: 100%;
+  }
+}

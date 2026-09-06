@@ -175,3 +175,40 @@
   border-radius: 6px;
   font-size: 0.8rem;
 }
+@media (max-width: 760px) {
+  .categoria-form {
+    flex-wrap: wrap;
+  }
+
+  .categoria-form input,
+  .categoria-form button {
+    width: 100%;
+  }
+
+  .categoria-header {
+    flex-wrap: wrap;
+  }
+
+  .atributo-item {
+    flex-wrap: wrap;
+  }
+
+  .atributo-info {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .opciones-box {
+    width: 100%;
+  }
+
+  .atributo-form {
+    flex-wrap: wrap;
+  }
+
+  .atributo-form input,
+  .atributo-form select,
+  .atributo-form button {
+    width: 100%;
+  }
+}

@@ -72,3 +72,16 @@
   font-size: 0.85rem;
   color: var(--text-dark);
 }
+@media (max-width: 760px) {
+  .cliente-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cliente-fila {
+    flex-wrap: wrap;
+  }
+
+  .cliente-fila-acciones {
+    width: 100%;
+  }
+}

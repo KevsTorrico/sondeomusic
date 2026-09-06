@@ -139,3 +139,30 @@
   background: white;
   color: var(--text-muted);
 }
+@media (max-width: 760px) {
+  .filtros-bar {
+    flex-wrap: wrap;
+  }
+
+  .filtros-bar input,
+  .filtros-bar select {
+    width: 100%;
+  }
+
+  .equipo-fila {
+    flex-wrap: wrap;
+  }
+
+  .equipo-fila-info {
+    width: 100%;
+  }
+
+  .equipo-fila-acciones {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .equipo-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
